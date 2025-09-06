@@ -6,16 +6,14 @@ const Listing = require("./models/listing.js");
  
 require('dotenv').config();
 // const dbUrl = process.env.Atlas_Url;
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-
-const MONGO_URL = process.env.Atlas_Url;
+const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
 const  path = require("path");
 const methodOverride = require("method-override");
 const wrapAsync = require("./utils/wrappasync.js");
 const ExpressError = require("./utils/ExpressError.js")
 const ejsMate = require("ejs-mate");
-// const { Route } = require("@mui/icons-material");
+const { Route } = require("@mui/icons-material");
 const listingRouter = require("./routs/listing.js")
 const Review = require("./models/review.js");
 const reviewRouter = require("./routs/review.js")
@@ -66,19 +64,19 @@ app.engine("ejs" , ejsMate);
 app.use(express.static(path.join(__dirname , "/public")))
 
 
-const store = MongoStore.create({
-    mongoUrl: MONGO_URL,
-    crypto:{
-        secret: "mysupersecretcode"
-    },
-    touchAfter: 24 * 3600 ,
-});
+// const store = MongoStore.create({
+//     mongoUrl: dbUrl,
+//     crypto:{
+//         secret: "mysupersecretcode"
+//     },
+//     touchAfter: 24 * 3600 ,
+// });
 
-store.on("error" , ()=>{
-    console.log("Error in mongo session store.",err)
-})
+// store.on("error" , ()=>{
+//     console.log("Error in mongo session store.",err)
+// })
 const sessionOption = {
-    store, 
+    // store, 
     secret:"mysupersecret",
     resave:false,
     saveUninitalized:true,
